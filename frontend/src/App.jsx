@@ -16,7 +16,7 @@ function App() {
     {
       path: "/signup",
       element: <SignupPage />,
-    },  
+    },
     {
       path: "/dashboard",
       element: <DashboardPage />,
