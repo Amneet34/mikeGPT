@@ -3,8 +3,7 @@ from flask import Flask, send_file, request, jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS
 from config import Config
-from models import db, User
-from pprint import pprint
+from models import db, User, Question
 from flask_socketio import SocketIO, emit
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
@@ -29,6 +28,14 @@ def users():
     db.session.commit()
     return jsonify(user.to_dict()), 201
 
+@app.post('/questions')
+def questions():
+    data = request.form
+    question = Question(data['question'])
+    print(data)
+    db.session.add(question)
+    db.session.commit()
+    return jsonify(question.to_dict()), 201
 
 @app.post('/login')
 def login():
@@ -43,6 +50,19 @@ def login():
     else:
         return jsonify({'error': 'Invalid email or password'}), 422
 
+@app.get('/questions')
+def all_questions():
+    questions = Question.query.all()
+    Question.query.count()
+    return jsonify([question.to_dict() for question in questions])  
+
+@app.get('/questions/<int:id>')
+def see(id):
+    question = Question.query.get(id)
+    if question:
+        return jsonify(question.to_dict())
+    else:
+        return {}, 404
 
 @app.get('/users/<int:id>')
 def show(id):
@@ -57,7 +77,6 @@ def all_users():
     users = User.query.all()
     User.query.count()
     return jsonify([user.to_dict() for user in users])
-
 
 @app.patch('/users/<int:id>')
 def update_user(id):
