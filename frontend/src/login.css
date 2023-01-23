@@ -64,7 +64,7 @@ body {
     font-size: 12px;
 }
 
-.login-box form a  {
+.login-box .btn form a  {
     position: relative;
     display: inline-block;
     padding: 10px 20px;

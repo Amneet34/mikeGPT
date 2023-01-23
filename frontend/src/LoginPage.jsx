@@ -8,8 +8,26 @@ function LoginPage() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+<<<<<<< HEAD
 
         console.log(`Username: ${username} Password: ${password}`);
+=======
+        const handleSubmit = (e) => {
+            e.preventDefault()
+            fetch(`http://localhost:3000/users`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.username === true) navigate('/dashboard')
+
+                    else if (data.username === false) {
+                        setCurrentStaff(data)
+                        navigate('/')
+                    }
+
+                })
+                .catch(() => console.log("No Such Route"))
+        }
+>>>>>>> 5b8011f (mix and match)
         navigate("/dashboard")
     };
 
