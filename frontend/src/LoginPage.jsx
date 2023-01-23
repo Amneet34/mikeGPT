@@ -8,10 +8,6 @@ function LoginPage() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-<<<<<<< HEAD
-
-        console.log(`Username: ${username} Password: ${password}`);
-=======
         const handleSubmit = (e) => {
             e.preventDefault()
             fetch(`http://localhost:3000/users`)
@@ -27,7 +23,6 @@ function LoginPage() {
                 })
                 .catch(() => console.log("No Such Route"))
         }
->>>>>>> 5b8011f (mix and match)
         navigate("/dashboard")
     };
 
