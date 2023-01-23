@@ -78,6 +78,20 @@ def shoof(id):
     else:
         return {}, 404
 
+@app.get('/answers')
+def all_answers():
+    answers = Answer.query.all()
+    Answer.query.count()
+    return jsonify([answer.to_dict() for answer in answers])  
+
+@app.get('/answers/<int:id>')
+def shoof(id):
+    answer = Answer.query.get(id)
+    if answer:
+        return jsonify(answer.to_dict())
+    else:
+        return {}, 404
+
 @app.get('/users/<int:id>')
 def show(id):
     user = User.query.get(id)
