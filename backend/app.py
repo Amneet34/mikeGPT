@@ -3,7 +3,7 @@ from flask import Flask, send_file, request, jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS
 from config import Config
-from models import db, User, Question
+from models import db, User, Question, Answer
 from flask_socketio import SocketIO, emit
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
@@ -61,6 +61,20 @@ def see(id):
     question = Question.query.get(id)
     if question:
         return jsonify(question.to_dict())
+    else:
+        return {}, 404
+
+@app.get('/answers')
+def all_answers():
+    answers = Answer.query.all()
+    Answer.query.count()
+    return jsonify([answer.to_dict() for answer in answers])  
+
+@app.get('/answers/<int:id>')
+def shoof(id):
+    answer = Answer.query.get(id)
+    if answer:
+        return jsonify(answer.to_dict())
     else:
         return {}, 404
 

@@ -44,7 +44,28 @@ class Question(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'content': self.content,
+            'answers': [answer.to_dict() for answer in Answer.query.filter_by(question_id=self.id)],
         }
 
     def __repr__(self):
         return f'<Question {self.id}>'
+
+class Answer(db.Model):
+    __tablename__ = 'answers'
+    id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=True)
+    content = db.Column(db.Text, nullable=False)
+    status = db.Column(db.String, nullable=True, server_default='published')
+
+    def __init__(self, content):
+        self.content = content
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'question_id': self.question_id,
+            'content': self.content
+        }
+
+def __repr__(self):
+    return f'<Answer {self.id}>'
