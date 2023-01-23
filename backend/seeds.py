@@ -1,5 +1,5 @@
 from app import app
-from models import db, User, Question
+from models import db, User, Question, Answer
 
 def run_seeds():
     print('Seeding database ... 🌱')
@@ -14,6 +14,13 @@ def run_seeds():
         question.user_id = user.id
         seeded_questions.append(question)
       db.session.add_all(seeded_questions)
+      db.session.commit()
+      seeded_answers = []
+      for _ in range(1):
+        answer = Answer('Nah fuck the system')
+        answer.question_id = question.id
+        seeded_answers.append(answer)
+      db.session.add_all(seeded_answers)
       db.session.commit()
       print('Done! 🌳')
 run_seeds()
