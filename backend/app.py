@@ -3,7 +3,7 @@ from flask import Flask, send_file, request, jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS
 from config import Config
-from models import db, User, Question, Answer
+from models import db, User, Answer
 from flask_socketio import SocketIO, emit
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
@@ -28,15 +28,6 @@ def users():
     db.session.commit()
     return jsonify(user.to_dict()), 201
 
-@app.post('/questions')
-def questions():
-    data = request.form
-    question = Question(data['question'])
-    print(data)
-    db.session.add(question)
-    db.session.commit()
-    return jsonify(question.to_dict()), 201
-
 @app.post('/login')
 def login():
     data = request.form
@@ -50,6 +41,7 @@ def login():
     else:
         return jsonify({'error': 'Invalid email or password'}), 422
 
+<<<<<<< HEAD
 @app.get('/questions')
 def all_questions():
     questions = Question.query.all()
@@ -77,7 +69,12 @@ def shoof(id):
         return jsonify(answer.to_dict())
     else:
         return {}, 404
+=======
+<<<<<<< HEAD
+>>>>>>> d58b90e (sleepy time)
 
+=======
+>>>>>>> 248416d (sleepy time)
 @app.get('/answers')
 def all_answers():
     answers = Answer.query.all()

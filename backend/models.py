@@ -22,13 +22,13 @@ class User(db.Model):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email,
-            'questions': [question.to_dict() for question in Question.query.filter_by(user_id=self.id)],
+            'email': self.email
         }
 
     def __repr__(self):
         return '<User %r>' % self.username
 
+<<<<<<< HEAD
 class Question(db.Model):
     __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True)
@@ -57,10 +57,11 @@ class Question(db.Model):
     def __repr__(self):
         return f'<Question {self.id}>'
 
+=======
+>>>>>>> 248416d (sleepy time)
 class Answer(db.Model):
     __tablename__ = 'answers'
     id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=True)
     content = db.Column(db.Text, nullable=False)
     status = db.Column(db.String, nullable=True, server_default='published')
 
