@@ -25,14 +25,24 @@ function LoginPage() {
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
                     <label>Password</label>
                 </div >
-                <button style={{background: 'none', border: 'none'}} type="submit">
+                <button style={{ background: 'none', border: 'none', padding: '30px' }} type="submit">
                     <a >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    login
-                </a></button>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        login
+                    </a></button>
+                <button style={{ background: 'none', border: 'none' }} type="submit" onClick={() => navigate('/Signup')}>
+                    <a >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Signup
+                    </a>   
+                </button>
+                
             </form>
         </div>
     );
