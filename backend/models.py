@@ -21,7 +21,8 @@ class User(db.Model):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'password': self.password
         }
 
     def __repr__(self):

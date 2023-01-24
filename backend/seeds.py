@@ -4,7 +4,7 @@ from models import db, User, Answer
 def run_seeds():
     print('Seeding database ... 🌱')
     with app.app_context():
-      user = User('mikegpt', 'mikegpt@example.com', '22222222')
+      user = User('mikegpt', 'mikegpt@example.com', '111')
       db.session.add(user)
       db.session.commit()
       user = User.query.first()
