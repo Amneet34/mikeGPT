@@ -11,7 +11,6 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     admin = db.Column(db.Boolean, server_default='f', nullable=True)
-    questions = db.relationship('Question', backref='user', lazy=True)
 
     def __init__(self, username, email, password):
         self.username = username
@@ -40,7 +39,6 @@ class Answer(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'question_id': self.question_id,
             'content': self.content
         }
 
