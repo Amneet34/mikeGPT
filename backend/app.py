@@ -31,7 +31,7 @@ def users():
 @app.post('/login')
 def login():
     data = request.form
-    user = User.query.filter_by(email=data['email']).first()
+    user = User.query.filter_by(username=data['username']).first()
     if not user:
         return jsonify({'error': 'No user found'}), 404
     given_password = data['password']
@@ -39,7 +39,7 @@ def login():
         token = create_access_token(identity=user.id)
         return jsonify({'user': user.to_dict(), 'token': token})
     else:
-        return jsonify({'error': 'Invalid email or password'}), 422
+        return jsonify({'error': 'Invalid username or password'}), 422
 
 @app.get('/answers')
 def all_answers():

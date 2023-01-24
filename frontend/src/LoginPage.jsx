@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/users/${username}`);
-            const data = await response.json();
-            if (data.username === username) {
+            let response = await fetch('http://localhost:3000/users');
+            let users = await response.json();
+            let match = users.find(user => user.username === username && user.password === password);
+            if (match) {
                 navigate('/dashboard');
             } else {
-                navigate('/');
+                setError('Invalid username or password');
             }
-            setLoading(false);
         } catch (err) {
             setError(err);
-            setLoading(false);
             console.log("No Such Route");
         }
     }
@@ -56,10 +53,10 @@ function LoginPage() {
                         Signup
                     </a>
                 </button>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
         </div>
     );
 }
 
 export default LoginPage;
-

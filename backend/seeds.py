@@ -8,13 +8,6 @@ def run_seeds():
       db.session.add(user)
       db.session.commit()
       user = User.query.first()
-      seeded_questions = []
-      for _ in range(1):
-        question = Question('should we trust the system?')
-        question.user_id = user.id
-        seeded_questions.append(question)
-      db.session.add_all(seeded_questions)
-      db.session.commit()
       seeded_answers = []
       for _ in range(1):
         answer1 =  Answer ('Not legally according to the authorities!')
@@ -57,18 +50,6 @@ def run_seeds():
         answer38 =  Answer ("Students working on React, Meet in Turing!")
         answer39 =  Answer ("Be back in Turing in 1hour!")
         answer40 = Answer('Nah fuck the system')
-
-
-
-
-
-
-
-
-
-
-        answer1.question_id = question1.id
-
         seeded_answers.append(answer1)
         seeded_answers.append(answer2)
         seeded_answers.append(answer3)
