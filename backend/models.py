@@ -28,7 +28,7 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
-<<<<<<< HEAD
+
 class Question(db.Model):
     __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True)
@@ -44,21 +44,15 @@ class Question(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'content': self.content,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f00434e (wym)
->>>>>>> b639161 (wym)
+
+
             'answers': [answer.to_dict() for answer in Answer.query.filter_by(question_id=self.id)],
         }
 
     def __repr__(self):
         return f'<Question {self.id}>'
 
-=======
->>>>>>> 248416d (sleepy time)
+
 class Answer(db.Model):
     __tablename__ = 'answers'
     id = db.Column(db.Integer, primary_key=True)
@@ -76,18 +70,11 @@ class Answer(db.Model):
         }
 
 def __repr__(self):
-<<<<<<< HEAD
-    return f'<Answer {self.id}>'
-=======
-<<<<<<< HEAD
-    return f'<Answer {self.id}>'
-=======
-        }
 
-    def __repr__(self):
-        return f'<Question {self.id}>'
->>>>>>> 54dcaca (why you asking all them questions🤔)
-=======
     return f'<Answer {self.id}>'
->>>>>>> f00434e (wym)
->>>>>>> b639161 (wym)
+
+        
+
+def __repr__(self):
+        return f'<Question {self.id}>'
+
