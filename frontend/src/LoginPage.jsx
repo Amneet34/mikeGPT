@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const handleSubmit = (e) => {
-            e.preventDefault()
-            fetch(`http://localhost:3000/users`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.username === true) navigate('/dashboard')
-
-                    else if (data.username === false) {
-                        setCurrentStaff(data)
-                        navigate('/')
-                    }
-
-                })
-                .catch(() => console.log("No Such Route"))
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:3000/users/${username}`);
+            const data = await response.json();
+            if (data.username === username) {
+                navigate('/dashboard');
+            } else {
+                navigate('/');
+            }
+            setLoading(false);
+        } catch (err) {
+            setError(err);
+            setLoading(false);
+            console.log("No Such Route");
         }
-        navigate("/dashboard")
-    };
+    }
 
     return (
         <div className="login-box">
@@ -39,7 +40,7 @@ function LoginPage() {
                     <label>Password</label>
                 </div >
                 <button style={{ background: 'none', border: 'none', padding: '30px' }} type="submit">
-                    <a >
+                    <a>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -53,9 +54,8 @@ function LoginPage() {
                         <span></span>
                         <span></span>
                         Signup
-                    </a>   
+                    </a>
                 </button>
-                
             </form>
         </div>
     );

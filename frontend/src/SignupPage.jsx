@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SignupPage() {
-    const [email, setEmail] = useState('');
-    const [newUser, setNewUser] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState([]);
+    const [newUser, setNewUser] = useState([]);
+    const [password, setPassword] = useState([]);
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
@@ -16,7 +16,7 @@ function SignupPage() {
             <form onSubmit={handleSubmit}>
                 <h2>SignUp</h2>
                 <div className="user-box">
-                    <input type="text" value={email} onChange={e => setEmail(e.target.value)} required />
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
                     <label>Email</label>
                 </div>
                 <div className="user-box">
