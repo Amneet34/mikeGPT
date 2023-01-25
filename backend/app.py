@@ -7,7 +7,7 @@ from models import db, User, Answer
 from flask_socketio import SocketIO, emit
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
-app = Flask(__name__, static_folder='public')
+app = Flask(__name__)
 CORS(app, origins=['*'])
 app.config.from_object(Config)
 jwt = JWTManager(app)
@@ -19,14 +19,18 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 def home():
     return send_file('index.html')
 
-@app.post('/users')
-def users():
-    data = request.json
-    user = User(data['username'], data['email'], data['password'])
+@app.route('/users', methods=['POST'])
+def create_user():
+    data = request.get_json()
     print(data)
+    existing_user = User.query.filter_by(username=data['username']).first()
+    if existing_user:
+        return jsonify({'error': 'username already exists'}), 400
+
+    user = User(username=data['username'], email=data['email'], password=data['password'])
     db.session.add(user)
     db.session.commit()
-    return jsonify(user.to_dict()), 201
+    return jsonify({'message': 'User created successfully'}), 201
 
 @app.post('/login')
 def login():
