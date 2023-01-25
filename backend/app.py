@@ -21,7 +21,7 @@ def home():
 
 @app.post('/users')
 def users():
-    data = request.form
+    data = request.json
     user = User(data['username'], data['email'], data['password'])
     print(data)
     db.session.add(user)
