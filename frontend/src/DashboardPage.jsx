@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 
 function DashboardPage() {
-    const [messages, setMessages] = useState([]);
-    const [response, setResponse] = useState('');
     const [input, setInput] = useState('');
     const [answer, setAnswer] = useState([]);
+    const [allMessages, setAllMessages] = useState([]);
 
     useEffect(() => {
         const request = async () => {
@@ -17,27 +16,26 @@ function DashboardPage() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        setMessages([...messages, input]);
-        setInput('');
         if (answer.length > 0) {
             const randomIndex = Math.floor(Math.random() * answer.length);
-            setResponse(answer[randomIndex]);
+            setAllMessages([...allMessages, { content: input, type: "user" }, { content: answer[randomIndex].content, type: "bot" }])
         }
+        setInput('');
     }
 
     return (
         <div className="chat-container">
+            <div className="chat-header">
+                Chatbot
+            </div>
             <div className="chat-messages">
-                {messages.map((message, index) => (
-                    <div key={index} className="chat-message">
-                        {message}
+                {allMessages.map((message, index) => (
+                    <div key={index} className={`message ${message.type}`}>
+                        <div className="message-content">
+                            {message.content}
+                        </div>
                     </div>
                 ))}
-                {answer.length > 0 && (
-                    <div className="chat-response">
-                        {response.content}
-                    </div>
-                )}
             </div>
             <form className="chat-form" onSubmit={handleSubmit}>
                 <input
