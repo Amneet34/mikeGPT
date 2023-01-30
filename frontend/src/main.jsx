@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './login.css'
 import './dashboard.css'
+import './sure.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

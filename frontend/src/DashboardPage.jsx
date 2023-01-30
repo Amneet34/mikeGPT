@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function DashboardPage() {
     const [input, setInput] = useState('');
     const [answer, setAnswer] = useState([]);
     const [allMessages, setAllMessages] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const request = async () => {
@@ -24,9 +26,12 @@ function DashboardPage() {
     }
 
     return (
+        <div>
+            <button className="button-15" onClick={() => navigate('/logout')}>Logout</button>
+
         <div className="chat-container">
             <div className="chat-header">
-                Chatbot
+                MikeGPT
             </div>
             <div className="chat-messages">
                 {allMessages.map((message, index) => (
@@ -43,12 +48,13 @@ function DashboardPage() {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                />
+                    />
                 <button className="chat-submit" type="submit">
                     Send
                 </button>
             </form>
         </div>
+    </div>
     );
 }
 export default DashboardPage;

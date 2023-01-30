@@ -24,7 +24,7 @@ def run_seeds():
         answer12 = Answer ('Dont buy an M2.')
         answer13 =  Answer ('If you want to be a 10x developer')
         answer14 =  Answer ('10x Developers use bundle instead of bundle install')
-        answer15 =  Answer ('I became white because I coded in my basement for too long.')
+        answer15 =  Answer ('lol idk')
         answer16 =  Answer ('npm is for losers, use bun')
         answer17 =  Answer ('Best Pokemon EvBlaziken')
         answer18 =  Answer ('Now all we have left to do is....')
